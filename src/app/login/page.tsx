@@ -1,8 +1,15 @@
 import React from 'react'
-
+import Link from "next/link"
 const LoginPage = () => {
   return (
-    <div >LoginPage</div>
+    <div className='flex items-center flex-col mt-[25vh]'>
+      <div>
+        Login Page
+      </div>
+      <div className='m-2 rounded border-2 p-2'>
+        <Link href="/signup">SignUp</Link>
+      </div>
+    </div>
   )
 }
 
