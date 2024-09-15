@@ -44,7 +44,7 @@ export async function POST(request:NextRequest){
         }
 
         //Create Token
-        const token = await jwt.sign(tokenData,process.env.TOKEN_SECRET_KEY,{
+        const token = await jwt.sign(tokenData,process.env.TOKEN_SECRET_KEY!,{
             expiresIn:"1d"
         })
 
@@ -52,11 +52,13 @@ export async function POST(request:NextRequest){
             message:'LoggedIn successfully',
             success:true
         })
+
         response.cookies.set("token",token,{
             httpOnly:true
         })
 
         return response;
+        
     } catch (error:any) {
         return NextResponse.json({
             success:false,
