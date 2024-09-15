@@ -5,7 +5,7 @@ import bcryptjs from "bcryptjs";
 
 connectDB();
 
-export default async function POST(request : NextRequest){
+export async function POST(request : NextRequest){
     try {
         const reqBody = await request.json();
         const { username , email , password } = reqBody;
@@ -34,7 +34,7 @@ export default async function POST(request : NextRequest){
         const createUser = await User.create({
             username,
             email,
-            hashedPassword
+            password : hashedPassword
         });
 
         if(!createUser){
@@ -46,21 +46,22 @@ export default async function POST(request : NextRequest){
             })
         }
 
-        const savedUser = await createUser.save();
+        await createUser.save();
         
-        savedUser.password = undefined;
+        createUser.password = undefined;
 
         return NextResponse.json({
             success:true,
             message:'User created successfully.',
-            savedUser
+            createUser
         },{
             status:201
         })
     } catch (error:any) {
         return NextResponse.json({
             success:false,
-            message:error.message
+            message:error.message,
+            message1:'internal server error'
         },{
             status:500
         })

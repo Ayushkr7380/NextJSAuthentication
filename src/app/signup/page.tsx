@@ -1,13 +1,29 @@
 "use client";
 import React ,{ useState} from 'react'
 import Link from "next/link"
+import { toast } from "react-hot-toast"
+import axios from "axios";
+import { useRouter } from 'next/navigation';
 const SignUp = () => {
 
+  const router = useRouter();
   const [ user , setUser] = useState({username:'',email:'',password:''});
-  console.log(user);
+  // console.log(user);
 
-  const signUp = () =>{
+  const [ loading , setLoading ] = useState(false);
 
+  const signUp = async() =>{
+      try {
+        setLoading(true);
+        const response = await axios.post("/api/user/signup",user);
+        console.log("signup success",response.data);
+        router.push("/login");
+      } catch (error:any) {
+        toast.error(error.message);
+        console.log(error.message);
+      }finally{
+        setLoading(false);
+      }
   }
 
   return (
@@ -44,7 +60,10 @@ const SignUp = () => {
            onChange={(e)=>setUser({...user ,password:e.target.value})}
            className='text-black px-2 py-1 my-1 border-none outline-none rounded-md'
         />
-        <div className='my-3'>
+        <div className='my-4'>
+          {loading && <div>Loading...</div>}
+        </div>
+        <div className='my-1'>
           <button className='rounded border-2 px-1 mx-2 hover:bg-gray-600' onClick={signUp}>Signup</button>
           <Link href="/login" className='rounded border-2 p-1 mx-2 hover:bg-gray-600'>LoginPage</Link>
         </div>
