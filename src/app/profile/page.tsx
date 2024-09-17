@@ -6,7 +6,7 @@ import { toast } from 'react-hot-toast';
 const ProfilePage = () => {
   const router = useRouter();
 
-  const [ isLoading , setIsLoading] = useState(false);
+  const [isLoading , setIsLoading] = useState(false);
   const logoutUser = async()=>{
     try {
       setIsLoading(true);
