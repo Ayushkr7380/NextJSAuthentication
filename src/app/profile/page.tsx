@@ -12,6 +12,8 @@ const ProfilePage = () => {
       setIsLoading(true);
       const response = await axios.get("api/user/logout");
       console.log(response.data);
+
+      //redirecting page to login page
       router.push("/login"); 
     } catch (error:any) {
       toast.error(error.message);
