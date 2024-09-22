@@ -1,6 +1,5 @@
 import { connectDB } from "@/dbConfig/dbConfig";
-import User from "@/models/userModel";
-import { NextRequest , NextResponse } from "next/server";
+import {  NextResponse } from "next/server";
 connectDB();
 
 export async function GET(){
@@ -10,6 +9,7 @@ export async function GET(){
             message:"Logout successfull."
         })
 
+        //set token to cookies
         response.cookies.set("token","",{
             httpOnly:true
         });
