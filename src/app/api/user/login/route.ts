@@ -8,6 +8,7 @@ connectDB();
 export async function POST(request:NextRequest){
     try {
         const {email , password} = await request.json();
+        //check email and password is available or not
         if(!email || !password){
             return NextResponse.json({
                 success:false,
