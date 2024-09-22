@@ -16,6 +16,8 @@ export async function POST(request:NextRequest){
                 status:400
             })
         }
+
+        //check user exists in db or not
         const checkUserExists = await User.findOne({email});
         if(!checkUserExists){
             return NextResponse.json({
@@ -54,6 +56,7 @@ export async function POST(request:NextRequest){
             token
         })
 
+        //set token in cookies
         response.cookies.set("token",token,{
             httpOnly:true
         })
