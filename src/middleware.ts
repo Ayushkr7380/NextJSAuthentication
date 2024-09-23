@@ -8,6 +8,7 @@ export function middleware(request: NextRequest) {
 
   const isPublicPath = path === '/login' || path === '/signup' 
 
+  //get token from cookies
   const token = request.cookies.get('token')?.value || '';
 
   if(isPublicPath && token ){
@@ -18,7 +19,7 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/login',request.nextUrl));
   }
 }
- 
+
 // See "Matching Paths" below to learn more
 export const config = {
   matcher: [
