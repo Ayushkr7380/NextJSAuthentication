@@ -34,7 +34,7 @@ const ProfilePage = () => {
             isLoading && <div>Loading...</div>
           }
         </div>
-        <div className='mt-5 px-2 py-1 font-bold rounded bg-orange-600 cursor-pointer'>
+        <div className='mt-5 px-2 py-1 font-bold rounded bg-yellow-300 cursor-pointer text-black'>
           <p onClick={logoutUser}>logout</p>
         </div>
     </div>
